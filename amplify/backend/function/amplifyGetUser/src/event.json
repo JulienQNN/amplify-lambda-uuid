@@ -1,1 +1,7 @@
-{ "test": "event" }
+{
+  "body": {
+    "firstname": "franck",
+    "lastname": "ocean",
+    "age": 45
+  }
+}

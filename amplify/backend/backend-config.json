@@ -32,6 +32,17 @@
   "function": {
     "amplifyGetUser": {
       "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "user"
+        }
+      ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
