@@ -1,0 +1,14 @@
+{
+  "resourceName": "dynamoiim",
+  "tableName": "user",
+  "partitionKey": {
+    "fieldName": "id",
+    "fieldType": "number"
+  },
+  "sortKey": {
+    "fieldName": "lastname",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

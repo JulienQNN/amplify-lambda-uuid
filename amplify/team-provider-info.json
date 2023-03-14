@@ -10,6 +10,11 @@
       "StackName": "amplify-amplifyuuid-dev-94653",
       "StackId": "arn:aws:cloudformation:eu-west-1:554097515570:stack/amplify-amplifyuuid-dev-94653/c6125bd0-c244-11ed-b714-06d31cf1776b",
       "AmplifyAppId": "d1uuwfae9fp4z9"
+    },
+    "categories": {
+      "storage": {
+        "dynamoiim": {}
+      }
     }
   }
 }
