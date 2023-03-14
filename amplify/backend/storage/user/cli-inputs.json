@@ -3,7 +3,7 @@
   "tableName": "user",
   "partitionKey": {
     "fieldName": "id",
-    "fieldType": "number"
+    "fieldType": "string"
   },
   "sortKey": {
     "fieldName": "lastname",
