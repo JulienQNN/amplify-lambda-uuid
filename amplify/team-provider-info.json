@@ -16,6 +16,10 @@
         "amplifyadduser": {
           "deploymentBucketName": "amplify-amplifyuuid-dev-94653-deployment",
           "s3Key": "amplify-builds/amplifyadduser-567a5841434970754132-build.zip"
+        },
+        "amplifyGetUser": {
+          "deploymentBucketName": "amplify-amplifyuuid-dev-94653-deployment",
+          "s3Key": "amplify-builds/amplifyGetUser-746746495a7256554b46-build.zip"
         }
       },
       "storage": {

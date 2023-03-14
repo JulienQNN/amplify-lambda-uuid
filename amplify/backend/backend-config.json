@@ -1,5 +1,10 @@
 {
   "function": {
+    "amplifyGetUser": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "amplifyadduser": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -7,6 +12,22 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_amplifyGetUser_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "amplifyGetUser"
+        }
+      ]
+    },
+    "AMPLIFY_function_amplifyGetUser_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "amplifyGetUser"
+        }
+      ]
+    },
     "AMPLIFY_function_amplifyadduser_deploymentBucketName": {
       "usedBy": [
         {
