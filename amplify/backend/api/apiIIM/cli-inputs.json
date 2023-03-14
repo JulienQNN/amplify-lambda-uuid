@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/getToken": {
+      "name": "/getToken",
+      "lambdaFunction": "amplifyGetUser",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}
