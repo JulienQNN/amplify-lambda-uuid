@@ -1,6 +1,15 @@
 export type AmplifyDependentResourcesAttributes = {
+  "function": {
+    "amplifyadduser": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    }
+  },
   "storage": {
-    "dynamoiim": {
+    "user": {
       "Arn": "string",
       "Name": "string",
       "PartitionKeyName": "string",

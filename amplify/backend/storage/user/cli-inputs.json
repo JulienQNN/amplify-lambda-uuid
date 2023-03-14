@@ -1,5 +1,5 @@
 {
-  "resourceName": "dynamoiim",
+  "resourceName": "user",
   "tableName": "user",
   "partitionKey": {
     "fieldName": "id",

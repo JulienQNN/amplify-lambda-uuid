@@ -1,6 +1,31 @@
 {
+  "function": {
+    "amplifyadduser": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_amplifyadduser_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "amplifyadduser"
+        }
+      ]
+    },
+    "AMPLIFY_function_amplifyadduser_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "amplifyadduser"
+        }
+      ]
+    }
+  },
   "storage": {
-    "dynamoiim": {
+    "user": {
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"
     }

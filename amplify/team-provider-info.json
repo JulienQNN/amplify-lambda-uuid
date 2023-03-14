@@ -12,8 +12,14 @@
       "AmplifyAppId": "d1uuwfae9fp4z9"
     },
     "categories": {
+      "function": {
+        "amplifyadduser": {
+          "deploymentBucketName": "amplify-amplifyuuid-dev-94653-deployment",
+          "s3Key": "amplify-builds/amplifyadduser-567a5841434970754132-build.zip"
+        }
+      },
       "storage": {
-        "dynamoiim": {}
+        "user": {}
       }
     }
   }
