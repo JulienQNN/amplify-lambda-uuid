@@ -19,7 +19,7 @@
         },
         "amplifyGetUser": {
           "deploymentBucketName": "amplify-amplifyuuid-dev-94653-deployment",
-          "s3Key": "amplify-builds/amplifyGetUser-76747566396e34334c76-build.zip"
+          "s3Key": "amplify-builds/amplifyGetUser-4a3362582f3173385173-build.zip"
         }
       },
       "storage": {

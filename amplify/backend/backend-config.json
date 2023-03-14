@@ -1,5 +1,19 @@
 {
   "api": {
+    "ApiIIM": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "amplifyGetUser"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
     "apiIIM": {
       "dependsOn": [
         {
