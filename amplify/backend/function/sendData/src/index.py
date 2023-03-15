@@ -31,6 +31,7 @@ def handler(event, context):
                 'userId': user_id
             }
             if event['body']['action'] == 'DB':
+                print('AVANT DE CALL LA LAMBDA')
                 lambdaEvent.invoke(
                     FunctionName='amplifyaddUser',
                     InvocationType='Event',
