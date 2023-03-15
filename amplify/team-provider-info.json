@@ -15,7 +15,7 @@
       "function": {
         "amplifyadduser": {
           "deploymentBucketName": "amplify-amplifyuuid-dev-94653-deployment",
-          "s3Key": "amplify-builds/amplifyadduser-35782b68383046566c70-build.zip"
+          "s3Key": "amplify-builds/amplifyadduser-687a4a554b6e775a364c-build.zip"
         },
         "amplifyGetUser": {
           "deploymentBucketName": "amplify-amplifyuuid-dev-94653-deployment",
@@ -23,7 +23,7 @@
         },
         "sendData": {
           "deploymentBucketName": "amplify-amplifyuuid-dev-94653-deployment",
-          "s3Key": "amplify-builds/sendData-61355678427266777768-build.zip"
+          "s3Key": "amplify-builds/sendData-325863525a652b387469-build.zip"
         },
         "user": {}
       },

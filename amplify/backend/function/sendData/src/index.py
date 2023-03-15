@@ -1,4 +1,5 @@
 import json
+import os
 
 import boto3
 
@@ -33,10 +34,18 @@ def handler(event, context):
             if event['body']['action'] == 'DB':
                 print('AVANT DE CALL LA LAMBDA')
                 lambdaEvent.invoke(
-                    FunctionName='amplifyaddUser',
-                    InvocationType='Event',
-                    Payload=payload,
+                    FunctionName=os.environ['FUNCTION_AMPLIFYADDUSER_NAME'],
+                    Payload=json.dumps(payload),
                 )
+                return {
+        'statusCode': 200,
+        'headers': {
+            'Access-Control-Allow-Headers': '*',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
+        },
+        'body': json.dumps('Done')
+    }
     return {
         'statusCode': 405,
         'headers': {
@@ -57,7 +66,8 @@ def handler(event, context):
 def get_user_id_in_secret(secret_name, secret_key):
     secret_object = secretmanager.get_secret_value(SecretId=secret_name)
     secret_values = json.loads(secret_object["SecretString"])
-
+    
     for key in secret_values:
-        if secret_values[key] == secret_key:
-            return key
+        print(key)
+        if key == secret_key:
+            return secret_values[key]

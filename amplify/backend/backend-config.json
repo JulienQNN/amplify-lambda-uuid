@@ -53,6 +53,15 @@
     },
     "sendData": {
       "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "amplifyadduser"
+        }
+      ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }

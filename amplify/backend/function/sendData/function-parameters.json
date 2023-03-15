@@ -1,3 +1,13 @@
 {
-  "lambdaLayers": []
+  "lambdaLayers": [],
+  "permissions": {
+    "function": {
+      "amplifyadduser": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  }
 }
