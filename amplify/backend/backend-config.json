@@ -50,6 +50,11 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "sendData": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "parameters": {
@@ -88,6 +93,10 @@
   },
   "storage": {
     "user": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
+    "userId": {
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"
     }
