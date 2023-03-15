@@ -89,6 +89,22 @@
           "resourceName": "amplifyadduser"
         }
       ]
+    },
+    "AMPLIFY_function_sendData_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "sendData"
+        }
+      ]
+    },
+    "AMPLIFY_function_sendData_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "sendData"
+        }
+      ]
     }
   },
   "storage": {

@@ -1,1 +1,9 @@
-{ "test": "event" }
+{
+    "body": {
+        "token": "akzbdkjqbfkjqln",
+        "action": "DB",
+        "data": {
+            "lastname": "hello"
+        }
+    }
+}

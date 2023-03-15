@@ -9,21 +9,33 @@ lambdaEvent = boto3.client('lambda')
 def handler(event, context):
     print('received event:')
     print(event)
-    
-    if event['body']['token']:
+
+    if event['body']:
         token = event['body']['token']
-        user_id = get_user_id_in_secret("userSecret", token)
-        data_from_body = event['body']['data']
-        payload = {
-            'data': data_from_body,
-            'userId': user_id
-        }
-        if event['body']['action'] == 'DB':
-            lambdaEvent.invoke(
-                FunctionName='amplifyaddUser',
-                InvocationType='Event',
-                Payload=payload,
-            )
+        if token:
+            user_id = get_user_id_in_secret("userSecret", token)
+            print(user_id)
+            if not user_id:
+                return {
+                    'statusCode': 405,
+                    'headers': {
+                        'Access-Control-Allow-Headers': '*',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
+                    },
+                    'body': json.dumps('no user_id affiliated with the token')
+                }
+            data_from_body = event['body']['data']
+            payload = {
+                'data': data_from_body,
+                'userId': user_id
+            }
+            if event['body']['action'] == 'DB':
+                lambdaEvent.invoke(
+                    FunctionName='amplifyaddUser',
+                    InvocationType='Event',
+                    Payload=payload,
+                )
     return {
         'statusCode': 405,
         'headers': {
@@ -31,13 +43,13 @@ def handler(event, context):
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
         },
-        'body': json.dumps('Pas de TOKEN envoyé')
+        'body': json.dumps('TOKEN MISSING')
     }
     #   check if token exist in db
-        # check body['action']
-        # action == S3 -> lambda for S3
-        # action ==
-        # return error
+    # check body['action']
+    # action == S3 -> lambda for S3
+    # action ==
+    # return error
 # 	return error
 
 

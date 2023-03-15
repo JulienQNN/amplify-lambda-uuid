@@ -2,7 +2,7 @@ import json
 
 
 def handler(event, context):
-    print('received event:')
+    print('received AMPLIFY ADD USER event:')
     print(event)
 
     return {
