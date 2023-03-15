@@ -32,20 +32,33 @@ def handler(event, context):
                 'userId': user_id
             }
             if event['body']['action'] == 'DB':
-                print('AVANT DE CALL LA LAMBDA')
                 lambdaEvent.invoke(
                     FunctionName=os.environ['FUNCTION_AMPLIFYADDUSER_NAME'],
                     Payload=json.dumps(payload),
                 )
                 return {
-        'statusCode': 200,
-        'headers': {
-            'Access-Control-Allow-Headers': '*',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
-        },
-        'body': json.dumps('Done')
-    }
+									'statusCode': 200,
+									'headers': {
+											'Access-Control-Allow-Headers': '*',
+											'Access-Control-Allow-Origin': '*',
+											'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
+									},
+									'body': 'Data inserted in Dynamo'
+    						}
+            if event['body']['action'] == 'S3':
+                response = lambdaEvent.invoke(
+                    FunctionName=os.environ['FUNCTION_ADDDATAS3_NAME'],
+                    Payload=json.dumps(payload),
+                )
+                return {
+									'statusCode': 200,
+									'headers': {
+											'Access-Control-Allow-Headers': '*',
+											'Access-Control-Allow-Origin': '*',
+											'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
+									},
+									'body': json.dumps(response['Payload'].read().decode())
+    						}
     return {
         'statusCode': 405,
         'headers': {
@@ -55,13 +68,6 @@ def handler(event, context):
         },
         'body': json.dumps('TOKEN MISSING')
     }
-    #   check if token exist in db
-    # check body['action']
-    # action == S3 -> lambda for S3
-    # action ==
-    # return error
-# 	return error
-
 
 def get_user_id_in_secret(secret_name, secret_key):
     secret_object = secretmanager.get_secret_value(SecretId=secret_name)

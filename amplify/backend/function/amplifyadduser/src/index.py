@@ -1,5 +1,6 @@
 import json
 
+import boto3
 from boto3.dynamodb.conditions import Attr
 
 dynamodb = boto3.resource('dynamodb')
@@ -33,7 +34,8 @@ def handler(event, context):
     }
 
 def insert_user(table, payload):
+    print('payload', payload)
     return table.put_item(Item={
-      'id': payload.userId,
-      'data': payload.data
+      'id': payload['userId'],
+      'data': payload['data']
     })

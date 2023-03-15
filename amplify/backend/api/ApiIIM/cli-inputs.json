@@ -7,6 +7,25 @@
       "permissions": {
         "setting": "open"
       }
+    },
+    "/sendData": {
+      "name": "/sendData",
+      "lambdaFunction": "sendData",
+      "permissions": {
+        "setting": "protected",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ],
+        "guest": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
     }
   }
 }

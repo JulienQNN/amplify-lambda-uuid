@@ -1,7 +1,7 @@
 {
     "body": {
         "token": "ef9fc59a-f681-42a3-b593-aac5f0d22f53",
-        "action": "DB",
+        "action": "S3",
         "data": {
             "lastname": "hello"
         }

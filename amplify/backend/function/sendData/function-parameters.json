@@ -7,6 +7,12 @@
         "read",
         "update",
         "delete"
+      ],
+      "addDataS3": [
+        "create",
+        "read",
+        "update",
+        "delete"
       ]
     }
   }

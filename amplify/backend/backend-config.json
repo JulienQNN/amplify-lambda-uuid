@@ -23,13 +23,63 @@
           ],
           "category": "function",
           "resourceName": "amplifyGetUser"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "sendData"
         }
       ],
       "providerPlugin": "awscloudformation",
       "service": "API Gateway"
     }
   },
+  "auth": {
+    "amplifyuuid847e615d": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
+    }
+  },
   "function": {
+    "addDataS3": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "BucketName"
+          ],
+          "category": "storage",
+          "resourceName": "userDataBucket"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "amplifyGetUser": {
       "build": true,
       "dependsOn": [
@@ -48,6 +98,26 @@
     },
     "amplifyadduser": {
       "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "user"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "userId"
+        }
+      ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
@@ -60,66 +130,28 @@
           ],
           "category": "function",
           "resourceName": "amplifyadduser"
+        },
+        {
+          "attributes": [
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "addDataS3"
         }
       ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
   },
-  "parameters": {
-    "AMPLIFY_function_amplifyGetUser_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "amplifyGetUser"
-        }
-      ]
-    },
-    "AMPLIFY_function_amplifyGetUser_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "amplifyGetUser"
-        }
-      ]
-    },
-    "AMPLIFY_function_amplifyadduser_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "amplifyadduser"
-        }
-      ]
-    },
-    "AMPLIFY_function_amplifyadduser_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "amplifyadduser"
-        }
-      ]
-    },
-    "AMPLIFY_function_sendData_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "sendData"
-        }
-      ]
-    },
-    "AMPLIFY_function_sendData_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "sendData"
-        }
-      ]
-    }
-  },
   "storage": {
     "user": {
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"
+    },
+    "userDataBucket": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
     },
     "userId": {
       "providerPlugin": "awscloudformation",

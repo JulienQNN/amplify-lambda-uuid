@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "{\"createdOn\":\"Linux\",\"createdBy\":\"Amplify\",\"createdWith\":\"10.7.3\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
+  "Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"Amplify\",\"createdWith\":\"10.8.1\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
     "CloudWatchRule": {
       "Type": "String",
@@ -16,29 +16,9 @@
     "s3Key": {
       "Type": "String"
     },
-    "storageuserIdName": {
+    "storageuserDataBucketBucketName": {
       "Type": "String",
-      "Default": "storageuserIdName"
-    },
-    "storageuserIdArn": {
-      "Type": "String",
-      "Default": "storageuserIdArn"
-    },
-    "storageuserIdStreamArn": {
-      "Type": "String",
-      "Default": "storageuserIdStreamArn"
-    },
-    "storageuserName": {
-      "Type": "String",
-      "Default": "storageuserName"
-    },
-    "storageuserArn": {
-      "Type": "String",
-      "Default": "storageuserArn"
-    },
-    "storageuserStreamArn": {
-      "Type": "String",
-      "Default": "storageuserStreamArn"
+      "Default": "storageuserDataBucketBucketName"
     }
   },
   "Conditions": {
@@ -71,12 +51,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "amplifyadduser",
+            "addDataS3",
             {
               "Fn::Join": [
                 "",
                 [
-                  "amplifyadduser",
+                  "addDataS3",
                   "-",
                   {
                     "Ref": "env"
@@ -94,23 +74,8 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "STORAGE_USERID_NAME": {
-              "Ref": "storageuserIdName"
-            },
-            "STORAGE_USERID_ARN": {
-              "Ref": "storageuserIdArn"
-            },
-            "STORAGE_USERID_STREAMARN": {
-              "Ref": "storageuserIdStreamArn"
-            },
-            "STORAGE_USER_NAME": {
-              "Ref": "storageuserName"
-            },
-            "STORAGE_USER_ARN": {
-              "Ref": "storageuserArn"
-            },
-            "STORAGE_USER_STREAMARN": {
-              "Ref": "storageuserStreamArn"
+            "STORAGE_USERDATABUCKET_BUCKETNAME": {
+              "Ref": "storageuserDataBucketBucketName"
             }
           }
         },
@@ -131,12 +96,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "amplifyuuidLambdaRole1528d91a",
+            "amplifyuuidLambdaRoled56067c7",
             {
               "Fn::Join": [
                 "",
                 [
-                  "amplifyuuidLambdaRole1528d91a",
+                  "amplifyuuidLambdaRoled56067c7",
                   "-",
                   {
                     "Ref": "env"
@@ -207,34 +172,6 @@
         }
       }
     },
-    "secretsmanagerexecutionpolicy": {
-      "Type": "AWS::IAM::Policy",
-      "Properties": {
-        "PolicyName": "secretsmanager-execution-policy",
-        "Roles": [
-          {
-            "Ref": "LambdaExecutionRole"
-          }
-        ],
-        "PolicyDocument": {
-          "Version": "2012-10-17",
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Action": [
-                "secretsmanager:GetSecretValue",
-                "secretsmanager:CreateSecret",
-                "secretsmanager:PutSecretValue"
-              ],
-              "Resource": "arn:aws:secretsmanager:eu-west-1:554097515570:secret:userSecret-nHOrl5"
-            }
-          ]
-        }
-      },
-      "DependsOn": [
-        "LambdaExecutionRole"
-      ]
-    },
     "AmplifyResourcesPolicy": {
       "DependsOn": [
         "LambdaExecutionRole"
@@ -252,32 +189,16 @@
           "Statement": [
             {
               "Effect": "Allow",
-              "Action": [
-                "dynamodb:Put*",
-                "dynamodb:Create*",
-                "dynamodb:BatchWriteItem",
-                "dynamodb:Get*",
-                "dynamodb:BatchGetItem",
-                "dynamodb:List*",
-                "dynamodb:Describe*",
-                "dynamodb:Scan",
-                "dynamodb:Query",
-                "dynamodb:Update*",
-                "dynamodb:RestoreTable*",
-                "dynamodb:Delete*"
-              ],
+              "Action": "s3:ListBucket",
               "Resource": [
                 {
-                  "Ref": "storageuserArn"
-                },
-                {
                   "Fn::Join": [
-                    "/",
+                    "",
                     [
+                      "arn:aws:s3:::",
                       {
-                        "Ref": "storageuserArn"
-                      },
-                      "index/*"
+                        "Ref": "storageuserDataBucketBucketName"
+                      }
                     ]
                   ]
                 }
@@ -286,31 +207,20 @@
             {
               "Effect": "Allow",
               "Action": [
-                "dynamodb:Put*",
-                "dynamodb:Create*",
-                "dynamodb:BatchWriteItem",
-                "dynamodb:Get*",
-                "dynamodb:BatchGetItem",
-                "dynamodb:List*",
-                "dynamodb:Describe*",
-                "dynamodb:Scan",
-                "dynamodb:Query",
-                "dynamodb:Update*",
-                "dynamodb:RestoreTable*",
-                "dynamodb:Delete*"
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:DeleteObject"
               ],
               "Resource": [
                 {
-                  "Ref": "storageuserIdArn"
-                },
-                {
                   "Fn::Join": [
-                    "/",
+                    "",
                     [
+                      "arn:aws:s3:::",
                       {
-                        "Ref": "storageuserIdArn"
+                        "Ref": "storageuserDataBucketBucketName"
                       },
-                      "index/*"
+                      "/*"
                     ]
                   ]
                 }
