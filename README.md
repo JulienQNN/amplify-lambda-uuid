@@ -1,3 +1,3 @@
-![](md.png)
-![](md2.png)
-![](md2.png)
+![](diagrams/md.png)
+![](diagrams/md2.png)
+![](diagrams/md3.png)
