@@ -17,8 +17,6 @@ SQS_URL = "https://sqs.eu-west-1.amazonaws.com/554097515570/TriggerLambda"
 
 
 def handler(event, context):
-    print("received WEBHOOK event:")
-    print(event)
 
     if not event["body"]:
         return api_response("Data missing", 404)
@@ -38,7 +36,6 @@ def handler(event, context):
         return api_response("no user_id in secret", 401)
 
     payload = {"data": data, "userId": user_id, "webhook": webhook}
-    print(payload)
 
     insertion_new_data = insert_new_data(table_data, user_id, data)
     update_user_webhook = update_user(table_user, payload)
@@ -78,7 +75,6 @@ def insert_new_data(table_data, user_id, data):
 
 
 def get_user_sk(table_user, user_id):
-    print(user_id)
     response = table_user.query(
         KeyConditionExpression=Key("id").eq(user_id),
         ProjectionExpression="lastname",

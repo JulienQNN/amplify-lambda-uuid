@@ -5,14 +5,10 @@ import uuid
 import boto3
 from botocore.exceptions import ClientError
 
+s3_client = boto3.client("s3")
+
 
 def handler(event, context):
-
-    # Upload the file
-    s3_client = boto3.client("s3")
-    print(event)
-    print(json.dumps(event["userId"]))
-    print(event["userId"])
     try:
         s3_client.put_object(
             Body=json.dumps(event["data"]),
