@@ -1,13 +1,13 @@
 {
-  "resourceName": "userIdWebhook",
-  "tableName": "userIdWebhook",
+  "resourceName": "data",
+  "tableName": "data",
   "partitionKey": {
-    "fieldName": "webhook",
+    "fieldName": "id",
     "fieldType": "string"
   },
   "gsi": [
     {
-      "name": "user_id",
+      "name": "user_id__",
       "partitionKey": {
         "fieldName": "user_id",
         "fieldType": "string"

@@ -27,6 +27,18 @@
     "functionamplifyuuidapiResponseArn": {
       "Type": "String",
       "Default": "functionamplifyuuidapiResponseArn"
+    },
+    "storagedataName": {
+      "Type": "String",
+      "Default": "storagedataName"
+    },
+    "storagedataArn": {
+      "Type": "String",
+      "Default": "storagedataArn"
+    },
+    "storagedataStreamArn": {
+      "Type": "String",
+      "Default": "storagedataStreamArn"
     }
   },
   "Conditions": {
@@ -87,6 +99,15 @@
             },
             "FUNCTION_ADDDATAS3_NAME": {
               "Ref": "functionaddDataS3Name"
+            },
+            "STORAGE_DATA_NAME": {
+              "Ref": "storagedataName"
+            },
+            "STORAGE_DATA_ARN": {
+              "Ref": "storagedataArn"
+            },
+            "STORAGE_DATA_STREAMARN": {
+              "Ref": "storagedataStreamArn"
             }
           }
         },
@@ -254,7 +275,7 @@
                       },
                       ":function:",
                       {
-                        "Ref": "functionamplifyadduserName"
+                        "Ref": "functionaddDataS3Name"
                       }
                     ]
                   ]
@@ -289,8 +310,41 @@
                       },
                       ":function:",
                       {
-                        "Ref": "functionaddDataS3Name"
+                        "Ref": "functionamplifyadduserName"
                       }
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:Put*",
+                "dynamodb:Create*",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:Get*",
+                "dynamodb:BatchGetItem",
+                "dynamodb:List*",
+                "dynamodb:Describe*",
+                "dynamodb:Scan",
+                "dynamodb:Query",
+                "dynamodb:Update*",
+                "dynamodb:RestoreTable*",
+                "dynamodb:Delete*"
+              ],
+              "Resource": [
+                {
+                  "Ref": "storagedataArn"
+                },
+                {
+                  "Fn::Join": [
+                    "/",
+                    [
+                      {
+                        "Ref": "storagedataArn"
+                      },
+                      "index/*"
                     ]
                   ]
                 }

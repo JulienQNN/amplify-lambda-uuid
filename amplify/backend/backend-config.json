@@ -100,18 +100,14 @@
             "StreamArn"
           ],
           "category": "storage",
-          "resourceName": "user"
-        },
-        {
-          "attributes": [
-            "Name",
-            "Arn",
-            "StreamArn"
-          ],
-          "category": "storage",
-          "resourceName": "userId"
+          "resourceName": "data"
         }
       ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "exportDataToS3": {
+      "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
@@ -123,14 +119,23 @@
             "Name"
           ],
           "category": "function",
-          "resourceName": "amplifyadduser"
+          "resourceName": "addDataS3"
         },
         {
           "attributes": [
             "Name"
           ],
           "category": "function",
-          "resourceName": "addDataS3"
+          "resourceName": "amplifyadduser"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "data"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -138,6 +143,17 @@
     },
     "sendDataWebhook": {
       "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "user"
+        }
+      ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
@@ -191,6 +207,38 @@
         }
       ]
     },
+    "AMPLIFY_function_exportDataToS3_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "exportDataToS3"
+        }
+      ]
+    },
+    "AMPLIFY_function_exportDataToS3_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "exportDataToS3"
+        }
+      ]
+    },
+    "AMPLIFY_function_sendDataWebhook_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "sendDataWebhook"
+        }
+      ]
+    },
+    "AMPLIFY_function_sendDataWebhook_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "sendDataWebhook"
+        }
+      ]
+    },
     "AMPLIFY_function_sendData_deploymentBucketName": {
       "usedBy": [
         {
@@ -209,6 +257,10 @@
     }
   },
   "storage": {
+    "data": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
     "user": {
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"
@@ -217,14 +269,6 @@
       "dependsOn": [],
       "providerPlugin": "awscloudformation",
       "service": "S3"
-    },
-    "userId": {
-      "providerPlugin": "awscloudformation",
-      "service": "DynamoDB"
-    },
-    "userIdWebhook": {
-      "providerPlugin": "awscloudformation",
-      "service": "DynamoDB"
     }
   }
 }

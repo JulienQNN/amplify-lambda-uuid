@@ -44,7 +44,7 @@ def handler(event, context):
                     body=json.dumps(response["Payload"].read().decode()),
                 )
 
-    return api_response(status_code=405, body=json.dumps("TOKEN MISSINGggg"))
+    return api_response(status_code=405, body=json.dumps("TOKEN MISSING"))
 
 
 def get_user_id_in_secret(secret_name, secret_key):

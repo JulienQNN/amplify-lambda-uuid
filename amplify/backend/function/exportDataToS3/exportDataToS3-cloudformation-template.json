@@ -15,18 +15,6 @@
     },
     "s3Key": {
       "Type": "String"
-    },
-    "storageuserName": {
-      "Type": "String",
-      "Default": "storageuserName"
-    },
-    "storageuserArn": {
-      "Type": "String",
-      "Default": "storageuserArn"
-    },
-    "storageuserStreamArn": {
-      "Type": "String",
-      "Default": "storageuserStreamArn"
     }
   },
   "Conditions": {
@@ -59,12 +47,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "sendDataWebhook",
+            "exportDataToS3",
             {
               "Fn::Join": [
                 "",
                 [
-                  "sendDataWebhook",
+                  "exportDataToS3",
                   "-",
                   {
                     "Ref": "env"
@@ -81,15 +69,6 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
-            },
-            "STORAGE_USER_NAME": {
-              "Ref": "storageuserName"
-            },
-            "STORAGE_USER_ARN": {
-              "Ref": "storageuserArn"
-            },
-            "STORAGE_USER_STREAMARN": {
-              "Ref": "storageuserStreamArn"
             }
           }
         },
@@ -110,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "amplifyuuidLambdaRole5b4b1636",
+            "amplifyuuidLambdaRole142c299e",
             {
               "Fn::Join": [
                 "",
                 [
-                  "amplifyuuidLambdaRole5b4b1636",
+                  "amplifyuuidLambdaRole142c299e",
                   "-",
                   {
                     "Ref": "env"
@@ -181,86 +160,6 @@
                   }
                 ]
               }
-            }
-          ]
-        }
-      }
-    },
-    "secretsmanagerexecutionpolicy": {
-      "Type": "AWS::IAM::Policy",
-      "Properties": {
-        "PolicyName": "secretsmanager-execution-policy",
-        "Roles": [
-          {
-            "Ref": "LambdaExecutionRole"
-          }
-        ],
-        "PolicyDocument": {
-          "Version": "2012-10-17",
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Action": [
-                "secretsmanager:GetSecretValue",
-                "secretsmanager:CreateSecret",
-                "secretsmanager:PutSecretValue"
-              ],
-              "Resource": "arn:aws:secretsmanager:eu-west-1:554097515570:secret:userSecret-nHOrl5"
-            }
-          ]
-        }
-      },
-      "DependsOn": [
-        "LambdaExecutionRole"
-      ]
-    },
-    "AmplifyResourcesPolicy": {
-      "DependsOn": [
-        "LambdaExecutionRole"
-      ],
-      "Type": "AWS::IAM::Policy",
-      "Properties": {
-        "PolicyName": "amplify-lambda-execution-policy",
-        "Roles": [
-          {
-            "Ref": "LambdaExecutionRole"
-          }
-        ],
-        "PolicyDocument": {
-          "Version": "2012-10-17",
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Action": [
-                "dynamodb:Put*",
-                "dynamodb:Create*",
-                "dynamodb:BatchWriteItem",
-                "dynamodb:Get*",
-                "dynamodb:BatchGetItem",
-                "dynamodb:List*",
-                "dynamodb:Describe*",
-                "dynamodb:Scan",
-                "dynamodb:Query",
-                "dynamodb:Update*",
-                "dynamodb:RestoreTable*",
-                "dynamodb:Delete*"
-              ],
-              "Resource": [
-                {
-                  "Ref": "storageuserArn"
-                },
-                {
-                  "Fn::Join": [
-                    "/",
-                    [
-                      {
-                        "Ref": "storageuserArn"
-                      },
-                      "index/*"
-                    ]
-                  ]
-                }
-              ]
             }
           ]
         }

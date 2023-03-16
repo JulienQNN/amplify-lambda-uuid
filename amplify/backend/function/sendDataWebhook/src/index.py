@@ -1,43 +1,45 @@
 import json
 import boto3
+import os
 
 secretmanager = boto3.client("secretsmanager")
 lambdaEvent = boto3.client("lambda")
-from boto3.dynamodb.conditions import Attr
-
 dynamodb = boto3.resource("dynamodb")
+sqs = boto3.client("sqs")
+table_user = dynamodb.Table(os.environ["STORAGE_USER_NAME"])
 
 
 def handler(event, context):
     print("received WEBHOOK event:")
     print(event)
-    table = dynamodb.Table("")
+
+    if not event["body"]:
+        return api_response("Data missing", 404)
+
     body = json.loads(event["body"])
 
     if not body["webhook"] or not event["headers"]["x-api-key"]:
-        return api_response("NO WEBHOOK OR TOKEN FOUND", 404)
+        return api_response("Webhook or Token not found", 404)
 
-    body = json.loads(event["body"])
-    print(body)
-    token = event["headers"]["x-api-key"]
-    print(token)
     data = body["data"]
+    token = event["headers"]["x-api-key"]
     webhook = body["webhook"]
 
     user_id = get_user_id_in_secret("userSecret", token)
-    payload = {"data": data, "userId": user_id}
+    if not user_id:
+        return api_response("no user_id in secret", 401)
 
-    # TODO envoyer le payload dans dynamo
-    if user_id:
-        insert_user(table, payload)
-
-    # TODO ensuite trigger la SQS queue
+    payload = {"data": data, "userId": user_id, "webhook": webhook}
+    send_message_to_sqs(user_id)
 
     return api_response("HELLO LAMBDA", 200)
 
 
-def insert_user(table, payload):
-    return table.put_item(Item={"id": payload["userId"], "data": payload["data"]})
+expression = "SET list_elm = list_append( if_not_exists(list_elm, :empty), :list_elm)"
+
+
+def update_user(table_user, key, expression, payload):
+    table_user.update_item(Key=key, UpdateExpression=expression)
 
 
 def get_user_id_in_secret(secret_name, secret_key):
@@ -47,6 +49,13 @@ def get_user_id_in_secret(secret_name, secret_key):
     for key in secret_values:
         if key == secret_key:
             return secret_values[key]
+
+
+def send_message_to_sqs(user_id):
+    sqs.send_message(
+        QueueUrl="https://sqs.eu-west-1.amazonaws.com/554097515570/TriggerLambda",
+        MessageBody=json.dumps({"user_id": user_id}),
+    )
 
 
 def api_response(body, status_code):

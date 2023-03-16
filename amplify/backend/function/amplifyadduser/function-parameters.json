@@ -2,13 +2,7 @@
   "lambdaLayers": [],
   "permissions": {
     "storage": {
-      "user": [
-        "create",
-        "read",
-        "update",
-        "delete"
-      ],
-      "userId": [
+      "data": [
         "create",
         "read",
         "update",
