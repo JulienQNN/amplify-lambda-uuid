@@ -152,6 +152,15 @@
           ],
           "category": "storage",
           "resourceName": "user"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "data"
         }
       ],
       "providerPlugin": "awscloudformation",

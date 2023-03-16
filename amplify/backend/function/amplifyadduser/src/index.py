@@ -8,9 +8,8 @@ dynamodb = boto3.resource("dynamodb")
 
 
 def handler(event, context):
-    print('event', event)
+    print("event", event)
     table = dynamodb.Table(os.environ["STORAGE_DATA_NAME"])
-    # table = dynamodb.Table("data-dev")
 
     if event:
         insert_user(table, event)
