@@ -8,7 +8,6 @@ lambdaEvent = boto3.client("lambda")
 
 
 def handler(event, context):
-    print(event)
     if event:
         body = json.loads(event["body"])
         print(body)

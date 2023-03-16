@@ -30,7 +30,8 @@
         "addDataS3": {
           "deploymentBucketName": "amplify-amplifyuuid-dev-94653-deployment",
           "s3Key": "amplify-builds/addDataS3-367a2b5362546d684d4a-build.zip"
-        }
+        },
+        "sendDataWebhook": {}
       },
       "storage": {
         "user": {},

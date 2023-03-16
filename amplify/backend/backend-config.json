@@ -17,6 +17,14 @@
           ],
           "category": "function",
           "resourceName": "sendData"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "sendDataWebhook"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -127,6 +135,11 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "sendDataWebhook": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "parameters": {
@@ -206,6 +219,10 @@
       "service": "S3"
     },
     "userId": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
+    "userIdWebhook": {
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"
     }
