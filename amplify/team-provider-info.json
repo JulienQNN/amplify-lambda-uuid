@@ -16,20 +16,20 @@
       "function": {
         "amplifyadduser": {
           "deploymentBucketName": "amplify-amplifyuuid-dev-94653-deployment",
-          "s3Key": "amplify-builds/amplifyadduser-3673384f31746a595642-build.zip"
+          "s3Key": "amplify-builds/amplifyadduser-50494b33716f645a4c4b-build.zip"
         },
         "amplifyGetUser": {
           "deploymentBucketName": "amplify-amplifyuuid-dev-94653-deployment",
-          "s3Key": "amplify-builds/amplifyGetUser-6359623850384a684e41-build.zip"
+          "s3Key": "amplify-builds/amplifyGetUser-57645a364f4279326578-build.zip"
         },
         "sendData": {
           "deploymentBucketName": "amplify-amplifyuuid-dev-94653-deployment",
-          "s3Key": "amplify-builds/sendData-414c6553766e7535646a-build.zip"
+          "s3Key": "amplify-builds/sendData-773464674c516537302f-build.zip"
         },
         "user": {},
         "addDataS3": {
           "deploymentBucketName": "amplify-amplifyuuid-dev-94653-deployment",
-          "s3Key": "amplify-builds/addDataS3-64524969375068504472-build.zip"
+          "s3Key": "amplify-builds/addDataS3-367a2b5362546d684d4a-build.zip"
         }
       },
       "storage": {

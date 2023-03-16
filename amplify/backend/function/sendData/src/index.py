@@ -8,11 +8,14 @@ lambdaEvent = boto3.client("lambda")
 
 
 def handler(event, context):
-
+    print(event)
     if event:
-        token = event["token"]
-        data = event["data"]
-        action = event["action"]
+        body = json.loads(event["body"])
+        print(body)
+        token = event["headers"]["x-api-key"]
+        print(token)
+        data = body["data"]
+        action = body["action"]
 
         if token:
             user_id = get_user_id_in_secret("userSecret", token)
