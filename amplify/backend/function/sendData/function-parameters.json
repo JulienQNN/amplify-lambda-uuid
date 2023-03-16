@@ -1,5 +1,13 @@
 {
-  "lambdaLayers": [],
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "amplifyuuidapiResponse",
+      "env": "dev",
+      "version": "Always choose latest version",
+      "isLatestVersionSelected": true
+    }
+  ],
   "permissions": {
     "function": {
       "amplifyadduser": [

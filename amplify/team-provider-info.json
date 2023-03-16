@@ -9,31 +9,28 @@
       "UnauthRoleName": "amplify-amplifyuuid-dev-94653-unauthRole",
       "StackName": "amplify-amplifyuuid-dev-94653",
       "StackId": "arn:aws:cloudformation:eu-west-1:554097515570:stack/amplify-amplifyuuid-dev-94653/c6125bd0-c244-11ed-b714-06d31cf1776b",
-      "AmplifyAppId": "d1uuwfae9fp4z9"
+      "AmplifyAppId": "d1uuwfae9fp4z9",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-amplifyuuid-dev-94653-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     },
     "categories": {
       "function": {
         "amplifyadduser": {
           "deploymentBucketName": "amplify-amplifyuuid-dev-94653-deployment",
-          "s3Key": "amplify-builds/amplifyadduser-6c6b695a63583442506b-build.zip"
+          "s3Key": "amplify-builds/amplifyadduser-3673384f31746a595642-build.zip"
         },
         "amplifyGetUser": {
           "deploymentBucketName": "amplify-amplifyuuid-dev-94653-deployment",
-          "s3Key": "amplify-builds/amplifyGetUser-77706d4f77706b6f3436-build.zip"
+          "s3Key": "amplify-builds/amplifyGetUser-6359623850384a684e41-build.zip"
         },
         "sendData": {
           "deploymentBucketName": "amplify-amplifyuuid-dev-94653-deployment",
-          "s3Key": "amplify-builds/sendData-454131596f6a2b727136-build.zip"
+          "s3Key": "amplify-builds/sendData-414c6553766e7535646a-build.zip"
         },
         "user": {},
         "addDataS3": {
           "deploymentBucketName": "amplify-amplifyuuid-dev-94653-deployment",
-          "s3Key": "amplify-builds/addDataS3-6661316533684a63326e-build.zip"
+          "s3Key": "amplify-builds/addDataS3-64524969375068504472-build.zip"
         }
-      },
-      "api": {
-        "apiIIM": {},
-        "ApiIIM": {}
       },
       "storage": {
         "user": {},
@@ -42,6 +39,9 @@
       },
       "auth": {
         "amplifyuuid847e615d": {}
+      },
+      "api": {
+        "apiIIM": {}
       }
     }
   },

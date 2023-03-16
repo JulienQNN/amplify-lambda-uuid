@@ -1,19 +1,5 @@
 {
   "api": {
-    "ApiIIM": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "amplifyGetUser"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "API Gateway"
-    },
     "apiIIM": {
       "dependsOn": [
         {
@@ -141,6 +127,72 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_addDataS3_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addDataS3"
+        }
+      ]
+    },
+    "AMPLIFY_function_addDataS3_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addDataS3"
+        }
+      ]
+    },
+    "AMPLIFY_function_amplifyGetUser_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "amplifyGetUser"
+        }
+      ]
+    },
+    "AMPLIFY_function_amplifyGetUser_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "amplifyGetUser"
+        }
+      ]
+    },
+    "AMPLIFY_function_amplifyadduser_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "amplifyadduser"
+        }
+      ]
+    },
+    "AMPLIFY_function_amplifyadduser_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "amplifyadduser"
+        }
+      ]
+    },
+    "AMPLIFY_function_sendData_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "sendData"
+        }
+      ]
+    },
+    "AMPLIFY_function_sendData_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "sendData"
+        }
+      ]
     }
   },
   "storage": {

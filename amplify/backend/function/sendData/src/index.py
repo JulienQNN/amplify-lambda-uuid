@@ -3,77 +3,64 @@ import os
 
 import boto3
 
-secretmanager = boto3.client('secretsmanager')
-lambdaEvent = boto3.client('lambda')
+secretmanager = boto3.client("secretsmanager")
+lambdaEvent = boto3.client("lambda")
 
 
 def handler(event, context):
-    print('received event:')
-    print(event)
 
-    if event['body']:
-        token = event['body']['token']
+    if event:
+        token = event["token"]
+        data = event["data"]
+        action = event["action"]
+
         if token:
             user_id = get_user_id_in_secret("userSecret", token)
-            print(user_id)
+            payload = {"data": data, "userId": user_id}
+
             if not user_id:
-                return {
-                    'statusCode': 405,
-                    'headers': {
-                        'Access-Control-Allow-Headers': '*',
-                        'Access-Control-Allow-Origin': '*',
-                        'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
-                    },
-                    'body': json.dumps('no user_id affiliated with the token')
-                }
-            data_from_body = event['body']['data']
-            payload = {
-                'data': data_from_body,
-                'userId': user_id
-            }
-            if event['body']['action'] == 'DB':
+                return api_response(
+                    status_code=405, body=json.dumps("NO USER EXIST WITH THIS TOKEN")
+                )
+
+            if action == "DB":
                 lambdaEvent.invoke(
-                    FunctionName=os.environ['FUNCTION_AMPLIFYADDUSER_NAME'],
+                    FunctionName=os.environ["FUNCTION_AMPLIFYADDUSER_NAME"],
                     Payload=json.dumps(payload),
                 )
-                return {
-									'statusCode': 200,
-									'headers': {
-											'Access-Control-Allow-Headers': '*',
-											'Access-Control-Allow-Origin': '*',
-											'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
-									},
-									'body': 'Data inserted in Dynamo'
-    						}
-            if event['body']['action'] == 'S3':
+                return api_response(
+                    status_code=200, body=json.dumps("DATA INSERTED IN DYNAMODB")
+                )
+            if action == "S3":
                 response = lambdaEvent.invoke(
-                    FunctionName=os.environ['FUNCTION_ADDDATAS3_NAME'],
+                    FunctionName=os.environ["FUNCTION_ADDDATAS3_NAME"],
                     Payload=json.dumps(payload),
                 )
-                return {
-									'statusCode': 200,
-									'headers': {
-											'Access-Control-Allow-Headers': '*',
-											'Access-Control-Allow-Origin': '*',
-											'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
-									},
-									'body': json.dumps(response['Payload'].read().decode())
-    						}
-    return {
-        'statusCode': 405,
-        'headers': {
-            'Access-Control-Allow-Headers': '*',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
-        },
-        'body': json.dumps('TOKEN MISSING')
-    }
+
+                return api_response(
+                    status_code=200,
+                    body=json.dumps(response["Payload"].read().decode()),
+                )
+
+    return api_response(status_code=405, body=json.dumps("TOKEN MISSINGggg"))
+
 
 def get_user_id_in_secret(secret_name, secret_key):
     secret_object = secretmanager.get_secret_value(SecretId=secret_name)
     secret_values = json.loads(secret_object["SecretString"])
-    
+
     for key in secret_values:
-        print(key)
         if key == secret_key:
             return secret_values[key]
+
+
+def api_response(body, status_code):
+    return {
+        "statusCode": status_code,
+        "headers": {
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+        },
+        "body": body,
+    }

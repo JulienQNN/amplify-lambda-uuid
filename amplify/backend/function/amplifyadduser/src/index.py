@@ -3,39 +3,30 @@ import json
 import boto3
 from boto3.dynamodb.conditions import Attr
 
-dynamodb = boto3.resource('dynamodb')
+dynamodb = boto3.resource("dynamodb")
+
 
 def handler(event, context):
-    table = dynamodb.Table('userId-dev')
-    print('received AMPLIFY ADD USER event:')
-    print(event)
+    table = dynamodb.Table("userId-dev")
 
     if event:
-        print('ici')
         insert_user(table, event)
-        return {
-        'statusCode': 200,
-        'headers': {
-            'Access-Control-Allow-Headers': '*',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
-        },
-        'body': json.dumps('Hello from your new Amplify Python lambda!')
-    }
+        return api_response(status_code=200, body=json.dumps("INSERT DONE"))
 
-    return {
-        'statusCode': 401,
-        'headers': {
-            'Access-Control-Allow-Headers': '*',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
-        },
-        'body': json.dumps('Could not insert')
-    }
+    return api_response(status_code=401, body=json.dumps("COULD NOT INSERT"))
+
 
 def insert_user(table, payload):
-    print('payload', payload)
-    return table.put_item(Item={
-      'id': payload['userId'],
-      'data': payload['data']
-    })
+    return table.put_item(Item={"id": payload["userId"], "data": payload["data"]})
+
+
+def api_response(body, status_code):
+    return {
+        "statusCode": status_code,
+        "headers": {
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+        },
+        "body": body,
+    }

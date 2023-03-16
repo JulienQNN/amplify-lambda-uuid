@@ -23,6 +23,10 @@
     "functionaddDataS3Name": {
       "Type": "String",
       "Default": "functionaddDataS3Name"
+    },
+    "functionamplifyuuidapiResponseArn": {
+      "Type": "String",
+      "Default": "functionamplifyuuidapiResponseArn"
     }
   },
   "Conditions": {
