@@ -16,29 +16,17 @@
     "s3Key": {
       "Type": "String"
     },
-    "storageuserIdName": {
+    "storagedataName": {
       "Type": "String",
-      "Default": "storageuserIdName"
+      "Default": "storagedataName"
     },
-    "storageuserIdArn": {
+    "storagedataArn": {
       "Type": "String",
-      "Default": "storageuserIdArn"
+      "Default": "storagedataArn"
     },
-    "storageuserIdStreamArn": {
+    "storagedataStreamArn": {
       "Type": "String",
-      "Default": "storageuserIdStreamArn"
-    },
-    "storageuserName": {
-      "Type": "String",
-      "Default": "storageuserName"
-    },
-    "storageuserArn": {
-      "Type": "String",
-      "Default": "storageuserArn"
-    },
-    "storageuserStreamArn": {
-      "Type": "String",
-      "Default": "storageuserStreamArn"
+      "Default": "storagedataStreamArn"
     }
   },
   "Conditions": {
@@ -94,23 +82,14 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "STORAGE_USERID_NAME": {
-              "Ref": "storageuserIdName"
+            "STORAGE_DATA_NAME": {
+              "Ref": "storagedataName"
             },
-            "STORAGE_USERID_ARN": {
-              "Ref": "storageuserIdArn"
+            "STORAGE_DATA_ARN": {
+              "Ref": "storagedataArn"
             },
-            "STORAGE_USERID_STREAMARN": {
-              "Ref": "storageuserIdStreamArn"
-            },
-            "STORAGE_USER_NAME": {
-              "Ref": "storageuserName"
-            },
-            "STORAGE_USER_ARN": {
-              "Ref": "storageuserArn"
-            },
-            "STORAGE_USER_STREAMARN": {
-              "Ref": "storageuserStreamArn"
+            "STORAGE_DATA_STREAMARN": {
+              "Ref": "storagedataStreamArn"
             }
           }
         },
@@ -268,47 +247,14 @@
               ],
               "Resource": [
                 {
-                  "Ref": "storageuserArn"
+                  "Ref": "storagedataArn"
                 },
                 {
                   "Fn::Join": [
                     "/",
                     [
                       {
-                        "Ref": "storageuserArn"
-                      },
-                      "index/*"
-                    ]
-                  ]
-                }
-              ]
-            },
-            {
-              "Effect": "Allow",
-              "Action": [
-                "dynamodb:Put*",
-                "dynamodb:Create*",
-                "dynamodb:BatchWriteItem",
-                "dynamodb:Get*",
-                "dynamodb:BatchGetItem",
-                "dynamodb:List*",
-                "dynamodb:Describe*",
-                "dynamodb:Scan",
-                "dynamodb:Query",
-                "dynamodb:Update*",
-                "dynamodb:RestoreTable*",
-                "dynamodb:Delete*"
-              ],
-              "Resource": [
-                {
-                  "Ref": "storageuserIdArn"
-                },
-                {
-                  "Fn::Join": [
-                    "/",
-                    [
-                      {
-                        "Ref": "storageuserIdArn"
+                        "Ref": "storagedataArn"
                       },
                       "index/*"
                     ]

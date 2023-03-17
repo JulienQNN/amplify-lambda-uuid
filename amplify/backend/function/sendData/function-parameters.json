@@ -10,13 +10,21 @@
   ],
   "permissions": {
     "function": {
-      "amplifyadduser": [
+      "addDataS3": [
         "create",
         "read",
         "update",
         "delete"
       ],
-      "addDataS3": [
+      "amplifyadduser": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    },
+    "storage": {
+      "data": [
         "create",
         "read",
         "update",

@@ -16,26 +16,38 @@
       "function": {
         "amplifyadduser": {
           "deploymentBucketName": "amplify-amplifyuuid-dev-94653-deployment",
-          "s3Key": "amplify-builds/amplifyadduser-50494b33716f645a4c4b-build.zip"
+          "s3Key": "amplify-builds/amplifyadduser-48482f73336a56334674-build.zip"
         },
         "amplifyGetUser": {
           "deploymentBucketName": "amplify-amplifyuuid-dev-94653-deployment",
-          "s3Key": "amplify-builds/amplifyGetUser-57645a364f4279326578-build.zip"
+          "s3Key": "amplify-builds/amplifyGetUser-374c66417959636c2f55-build.zip"
         },
         "sendData": {
           "deploymentBucketName": "amplify-amplifyuuid-dev-94653-deployment",
-          "s3Key": "amplify-builds/sendData-773464674c516537302f-build.zip"
+          "s3Key": "amplify-builds/sendData-527441506a4857355868-build.zip"
         },
         "user": {},
         "addDataS3": {
           "deploymentBucketName": "amplify-amplifyuuid-dev-94653-deployment",
-          "s3Key": "amplify-builds/addDataS3-367a2b5362546d684d4a-build.zip"
+          "s3Key": "amplify-builds/addDataS3-32577a2f53462f745979-build.zip"
+        },
+        "sendDataWebhook": {
+          "deploymentBucketName": "amplify-amplifyuuid-dev-94653-deployment",
+          "s3Key": "amplify-builds/sendDataWebhook-773746495a767474314f-build.zip"
+        },
+        "exportDataToS3": {
+          "deploymentBucketName": "amplify-amplifyuuid-dev-94653-deployment",
+          "s3Key": "amplify-builds/exportDataToS3-45564a644b45396c5647-build.zip"
+        },
+        "sendWebhookToUser": {
+          "deploymentBucketName": "amplify-amplifyuuid-dev-94653-deployment",
+          "s3Key": "amplify-builds/sendWebhookToUser-4144644e2b697959766a-build.zip"
         }
       },
       "storage": {
         "user": {},
-        "userId": {},
-        "userDataBucket": {}
+        "userDataBucket": {},
+        "data": {}
       },
       "auth": {
         "amplifyuuid847e615d": {}

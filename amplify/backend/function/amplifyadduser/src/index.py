@@ -1,13 +1,15 @@
 import json
-
+import os
 import boto3
+import uuid
 from boto3.dynamodb.conditions import Attr
 
 dynamodb = boto3.resource("dynamodb")
 
 
 def handler(event, context):
-    table = dynamodb.Table("userId-dev")
+    print("event", event)
+    table = dynamodb.Table(os.environ["STORAGE_DATA_NAME"])
 
     if event:
         insert_user(table, event)
@@ -17,7 +19,13 @@ def handler(event, context):
 
 
 def insert_user(table, payload):
-    return table.put_item(Item={"id": payload["userId"], "data": payload["data"]})
+    return table.put_item(
+        Item={
+            "id": str(uuid.uuid4()),
+            "userId": payload["userId"],
+            "data": payload["data"],
+        }
+    )
 
 
 def api_response(body, status_code):

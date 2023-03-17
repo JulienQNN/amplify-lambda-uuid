@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"Amplify\",\"createdWith\":\"10.8.1\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
+  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"11.0.0\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
     "CloudWatchRule": {
       "Type": "String",
@@ -16,17 +16,17 @@
     "s3Key": {
       "Type": "String"
     },
-    "functionamplifyadduserName": {
+    "storageuserName": {
       "Type": "String",
-      "Default": "functionamplifyadduserName"
+      "Default": "storageuserName"
     },
-    "functionaddDataS3Name": {
+    "storageuserArn": {
       "Type": "String",
-      "Default": "functionaddDataS3Name"
+      "Default": "storageuserArn"
     },
-    "functionamplifyuuidapiResponseArn": {
+    "storageuserStreamArn": {
       "Type": "String",
-      "Default": "functionamplifyuuidapiResponseArn"
+      "Default": "storageuserStreamArn"
     },
     "storagedataName": {
       "Type": "String",
@@ -71,12 +71,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "sendData",
+            "sendDataWebhook",
             {
               "Fn::Join": [
                 "",
                 [
-                  "sendData",
+                  "sendDataWebhook",
                   "-",
                   {
                     "Ref": "env"
@@ -94,11 +94,14 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "FUNCTION_AMPLIFYADDUSER_NAME": {
-              "Ref": "functionamplifyadduserName"
+            "STORAGE_USER_NAME": {
+              "Ref": "storageuserName"
             },
-            "FUNCTION_ADDDATAS3_NAME": {
-              "Ref": "functionaddDataS3Name"
+            "STORAGE_USER_ARN": {
+              "Ref": "storageuserArn"
+            },
+            "STORAGE_USER_STREAMARN": {
+              "Ref": "storageuserStreamArn"
             },
             "STORAGE_DATA_NAME": {
               "Ref": "storagedataName"
@@ -128,12 +131,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "amplifyuuidLambdaRole9c6bc680",
+            "amplifyuuidLambdaRole5b4b1636",
             {
               "Fn::Join": [
                 "",
                 [
-                  "amplifyuuidLambdaRole9c6bc680",
+                  "amplifyuuidLambdaRole5b4b1636",
                   "-",
                   {
                     "Ref": "env"
@@ -250,68 +253,31 @@
             {
               "Effect": "Allow",
               "Action": [
-                "lambda:Create*",
-                "lambda:Put*",
-                "lambda:Add*",
-                "lambda:Get*",
-                "lambda:List*",
-                "lambda:Invoke*",
-                "lambda:Update*",
-                "lambda:Delete*",
-                "lambda:Remove*"
+                "dynamodb:Put*",
+                "dynamodb:Create*",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:Get*",
+                "dynamodb:BatchGetItem",
+                "dynamodb:List*",
+                "dynamodb:Describe*",
+                "dynamodb:Scan",
+                "dynamodb:Query",
+                "dynamodb:Update*",
+                "dynamodb:RestoreTable*",
+                "dynamodb:Delete*"
               ],
               "Resource": [
                 {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:lambda:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":function:",
-                      {
-                        "Ref": "functionaddDataS3Name"
-                      }
-                    ]
-                  ]
-                }
-              ]
-            },
-            {
-              "Effect": "Allow",
-              "Action": [
-                "lambda:Create*",
-                "lambda:Put*",
-                "lambda:Add*",
-                "lambda:Get*",
-                "lambda:List*",
-                "lambda:Invoke*",
-                "lambda:Update*",
-                "lambda:Delete*",
-                "lambda:Remove*"
-              ],
-              "Resource": [
+                  "Ref": "storageuserArn"
+                },
                 {
                   "Fn::Join": [
-                    "",
+                    "/",
                     [
-                      "arn:aws:lambda:",
                       {
-                        "Ref": "AWS::Region"
+                        "Ref": "storageuserArn"
                       },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":function:",
-                      {
-                        "Ref": "functionamplifyadduserName"
-                      }
+                      "index/*"
                     ]
                   ]
                 }
