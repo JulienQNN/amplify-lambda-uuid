@@ -1,0 +1,13 @@
+{
+  "lambdaLayers": [],
+  "permissions": {
+    "storage": {
+      "userDataBucket": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  }
+}

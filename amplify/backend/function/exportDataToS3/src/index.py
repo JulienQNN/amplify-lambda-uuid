@@ -28,37 +28,13 @@ def handler(event, context):
     response["webhook"] = user_webhook
     response["data"] = user_data
 
-    print(response)
-
-    # conn = http.client.HTTPSConnection("discord.com")
-    # payload = json.dumps({"content": "Hey voici le contenu du Webhook!"})
-    # headers = {
-    #     "Content-Type": "application/json",
-    # }
-    # conn.request(
-    #     "POST",
-    #     "/api/webhooks/1085859153853038632/fjypzqJdP16m5Dqdq7nr1RZfCdOQHZqNw77GYqjVjLfgj_xSw6afW9H1BQUELZ1X6_x3",
-    #     payload,
-    #     headers,
-    # )
-    # res = conn.getresponse()
-    # data = res.read()
-
-    return {
-        "statusCode": 200,
-        "headers": {
-            "Access-Control-Allow-Headers": "*",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-        },
-        "body": json.dumps("Hello from your new Amplify Python lambda!"),
-    }
+    put_object_S3(response)
 
 
 def get_user_data(user_id):
     response = table_data.query(
-        IndexName="user_id__",
-        KeyConditionExpression=Key("user_id").eq(user_id),
+        IndexName="userId-index",
+        KeyConditionExpression=Key("userId").eq(user_id),
         ProjectionExpression="#data",
         ExpressionAttributeNames={"#data": "data"},
     )
@@ -76,3 +52,11 @@ def get_user_webhook(user_id):
 
     except:
         return False
+
+
+def put_object_S3(data):
+    s3_client.put_object(
+        Body=json.dumps(data),
+        Bucket="userdatabucket94653-dev",
+        Key=f"data/{data['userId']}/data.json",
+    )

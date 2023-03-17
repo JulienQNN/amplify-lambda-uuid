@@ -192,6 +192,20 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "sendWebhookToUser": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "BucketName"
+          ],
+          "category": "storage",
+          "resourceName": "userDataBucket"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "parameters": {
@@ -288,6 +302,22 @@
         {
           "category": "function",
           "resourceName": "sendData"
+        }
+      ]
+    },
+    "AMPLIFY_function_sendWebhookToUser_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "sendWebhookToUser"
+        }
+      ]
+    },
+    "AMPLIFY_function_sendWebhookToUser_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "sendWebhookToUser"
         }
       ]
     }
