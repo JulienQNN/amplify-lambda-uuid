@@ -18,9 +18,7 @@ def handler(event, context):
     print("received de levent de sqs")
 
     response = {}
-    print(event)
     user_id = json.loads(event["Records"][0]["body"])["user_id"]
-    print("user_id", user_id)
     user_webhook = get_user_webhook(user_id)
     user_data = get_user_data(user_id)
 
@@ -38,7 +36,6 @@ def get_user_data(user_id):
         ProjectionExpression="#data",
         ExpressionAttributeNames={"#data": "data"},
     )
-    print(response)
 
     return response["Items"]
 

@@ -19,14 +19,10 @@ def handler(event, context):
     )
     data = file["Body"].read().decode("utf-8")
     dataJSON = json.loads(data)
-
     url = dataJSON["webhook"]
 
-    headers = {
-        "Content-Type": "application/json",
-    }
-
     payload = json.dumps({"content": str(dataJSON["data"])})
+
     headers = {
         "Content-Type": "application/json",
     }
