@@ -22,7 +22,6 @@ def handler(event, context):
 
     url = dataJSON["webhook"]
 
-    data = {"content": '{"name": "Bruce Wayne"}'}
     headers = {
         "Content-Type": "application/json",
     }
